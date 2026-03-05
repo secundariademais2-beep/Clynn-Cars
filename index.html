@@ -2,11 +2,706 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clynn Cars</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clynn Cars | Estética Automotiva Delivery</title>
+  <meta name="description" content="Clynn Cars — estética automotiva delivery. Lavagem completa (interno e externo), higienização e polimento. Agende pelo WhatsApp." />
+
+  <style>
+    :root{
+      --bg:#070c14;
+      --bg2:#0b1526;
+      --card: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.10);
+      --text:#eaf1ff;
+      --muted:#9fb0c9;
+
+      /* “cromado” + “azul royal” */
+      --silver1:#f3f6fb;
+      --silver2:#cfd6e2;
+      --silver3:#8e9bb0;
+      --blue1:#4aa8ff;
+      --blue2:#2d6bff;
+
+      --radius: 18px;
+      --shadow: 0 16px 40px rgba(0,0,0,.45);
+      --shadow2: 0 10px 26px rgba(0,0,0,.35);
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 600px at 15% 0%, rgba(74,168,255,.22), transparent 60%),
+        radial-gradient(900px 550px at 85% 10%, rgba(207,214,226,.14), transparent 60%),
+        radial-gradient(900px 650px at 60% 120%, rgba(45,107,255,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      line-height: 1.45;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width: var(--max); margin: 0 auto; padding: 0 18px; }
+
+    /* NAV */
+    .nav{
+      position: sticky; top:0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(7,12,20,.62);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding: 12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
+    }
+    .brand-badge{
+      width:44px; height:44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(74,168,255,.28), rgba(207,214,226,.18));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 14px 28px rgba(74,168,255,.12);
+      display:grid; place-items:center;
+      overflow:hidden;
+    }
+    .brand-badge img{
+      width:100%; height:100%; object-fit: cover;
+      display:block;
+    }
+    .brand-title{
+      display:flex; flex-direction:column;
+      line-height:1.1;
+    }
+    .brand-title strong{
+      font-size: 15px; letter-spacing:.2px;
+    }
+    .brand-title span{
+      font-size: 12px; color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .nav-links{
+      display:flex; align-items:center; gap:10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav-links a{
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+      font-weight: 650;
+      font-size: 13px;
+    }
+    .nav-links a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      font-weight: 750;
+      cursor: pointer;
+      transition:.2s ease;
+      box-shadow: none;
+      white-space: nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
+    .btn-primary{
+      border: none;
+      background:
+        linear-gradient(135deg, var(--blue1), var(--silver2));
+      color: #071018;
+      box-shadow: 0 18px 40px rgba(74,168,255,.16), 0 14px 34px rgba(207,214,226,.10);
+    }
+    .btn-primary:hover{ filter:saturate(1.03); }
+
+    /* HERO */
+    .hero{ padding: 42px 0 18px; }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .card-pad{ padding: 18px; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 58ch;
+    }
+    .hero-actions{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 16px;
+    }
+
+    .hero-right .topline{
+      display:flex; justify-content:space-between; align-items:flex-end; gap:10px;
+      margin-bottom: 10px;
+    }
+    .hero-right h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .hero-right p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .kpis{
+      display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+      margin-top: 12px;
+    }
+    .kpi{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow2);
+    }
+    .kpi .n{ font-weight: 850; font-size: 16px; }
+    .kpi .t{ margin-top: 6px; color: var(--muted); font-size: 12px; }
+
+    .promo{
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(135deg, rgba(74,168,255,.10), rgba(207,214,226,.06));
+    }
+    .promo strong{ display:block; margin-bottom: 6px; }
+    .note{ color: var(--muted); font-size: 13px; margin-top: 10px; }
+
+    section{ padding: 24px 0; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; margin-bottom: 12px;
+    }
+    .section-title h2{ margin:0; font-size: 22px; letter-spacing:-.2px; }
+    .section-title p{ margin:0; color: var(--muted); }
+
+    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grid2{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    .item{
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow2);
+    }
+    .item h3{ margin: 0 0 6px; font-size: 16px; }
+    .item p{ margin: 0; color: var(--muted); font-size: 14px; }
+
+    .price{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+      font-weight: 750;
+    }
+    .tag{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 750;
+    }
+    .tag-silver{
+      background: linear-gradient(135deg, rgba(243,246,251,.16), rgba(207,214,226,.10));
+      border-color: rgba(255,255,255,.14);
+    }
+
+    /* GALLERY */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .ph{
+      border-radius: 16px;
+      height: 150px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(135deg, rgba(74,168,255,.10), rgba(207,214,226,.06));
+      position: relative;
+      overflow:hidden;
+    }
+    .ph::after{
+      content:"Antes / Depois";
+      position:absolute; bottom:10px; left:12px;
+      font-weight: 800;
+      font-size: 12px;
+      color: rgba(255,255,255,.75);
+      letter-spacing:.2px;
+    }
+
+    /* FAQ */
+    details{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 14px 16px;
+      box-shadow: var(--shadow2);
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin: 10px 0 0; color: var(--muted); }
+
+    /* CONTACT */
+    .input{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+      font-size: 14px;
+    }
+    .input:focus{ border-color: rgba(74,168,255,.45); }
+    .form{ display:grid; gap: 10px; }
+    .mini{ font-size: 12px; color: var(--muted); }
+
+    .footer{
+      margin-top: 16px;
+      padding: 24px 0 44px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+    }
+    .footer .row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap: wrap;
+    }
+
+    /* FLOATING WHATS */
+    .whats-float{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 60;
+      box-shadow: var(--shadow);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .nav-links{ display:none; }
+      .grid3{ grid-template-columns: 1fr; }
+      .grid2{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: repeat(2, 1fr); }
+      .ph{ height: 130px; }
+    }
+  </style>
 </head>
-<body style="font-family:Arial; padding:40px;">
-  <h1>Clynn Cars ✅</h1>
-  <p>Se você está vendo isso, o GitHub Pages está funcionando.</p>
+
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-badge" title="Clynn Cars">
+          <!-- Suba sua logo como 'logo.png' no repositório -->
+          <img src="logo.png" alt="Logo Clynn Cars" onerror="this.style.display='none'; this.parentElement.textContent='CC'; this.parentElement.style.color='#eaf1ff'; this.parentElement.style.fontWeight='900';" />
+        </div>
+        <div class="brand-title">
+          <strong>Clynn Cars</strong>
+          <span>Estética Automotiva Delivery</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#servicos">Serviços</a>
+        <a href="#precos">Preços</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a class="btn btn-primary" id="btnWhatsTop" href="#">Agendar no WhatsApp</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="card card-pad">
+          <span class="pill">🚗 Atendimento em domicílio • Interno + Externo • Agendamento rápido</span>
+          <h1>Estética automotiva premium<br/>na sua casa.</h1>
+          <p class="sub">
+            Lavagem completa, higienização interna e cuidados estéticos com padrão Clynn Cars.
+            Praticidade + resultado — sem você sair de casa.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" id="btnWhatsHero" href="#">💬 Agendar agora</a>
+            <a class="btn" href="#precos">Ver preços</a>
+            <a class="btn" href="#como-funciona">Como funciona</a>
+          </div>
+
+          <p class="note">✅ Levamos os produtos. Você só precisa liberar água e tomada (quando necessário).</p>
+        </div>
+
+        <aside class="card card-pad hero-right">
+          <div class="topline">
+            <div>
+              <h2>Resumo rápido</h2>
+              <p>O que você recebe</p>
+            </div>
+            <span class="tag tag-silver">Premium</span>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi">
+              <div class="n">⏱️ 60–120 min</div>
+              <div class="t">Tempo médio por lavagem completa</div>
+            </div>
+            <div class="kpi">
+              <div class="n">📍 Delivery</div>
+              <div class="t">Atendemos casa/empresa</div>
+            </div>
+            <div class="kpi">
+              <div class="n">✨ Acabamento</div>
+              <div class="t">Detalhe no painel e vidros</div>
+            </div>
+            <div class="kpi">
+              <div class="n">💳 Pagamento</div>
+              <div class="t">PIX (e cartão, se disponível)</div>
+            </div>
+          </div>
+
+          <div class="promo">
+            <strong>📣 Promo de lançamento</strong>
+            <div class="mini">Edite este texto: “Lavagem completa com valor especial na primeira visita”.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos">
+      <div class="container">
+        <div class="section-title">
+          <h2>Serviços</h2>
+          <p>O essencial + o premium</p>
+        </div>
+
+        <div class="grid3">
+          <div class="item">
+            <h3>Lavagem Completa</h3>
+            <p>Externo + aspiração + painel + vidros internos + rodas.</p>
+            <div class="price">
+              <span class="tag">Mais pedido</span>
+              <span>A partir de <strong>R$ 79</strong></span>
+            </div>
+          </div>
+
+          <div class="item">
+            <h3>Higienização Interna</h3>
+            <p>Limpeza profunda e remoção de odores (sob avaliação).</p>
+            <div class="price">
+              <span class="tag">Detalhado</span>
+              <span>A partir de <strong>R$ 149</strong></span>
+            </div>
+          </div>
+
+          <div class="item">
+            <h3>Polimento / Revitalização</h3>
+            <p>Realce do brilho e correção leve de marcas (consulta).</p>
+            <div class="price">
+              <span class="tag">Premium</span>
+              <span><strong>Orçamento</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREÇOS -->
+    <section id="precos">
+      <div class="container">
+        <div class="section-title">
+          <h2>Preços (exemplo)</h2>
+          <p>Você pode ajustar depois</p>
+        </div>
+
+        <div class="grid3">
+          <div class="item">
+            <h3>Básico</h3>
+            <p>Lavagem externa + rodas + acabamento rápido.</p>
+            <div class="price">
+              <span class="tag">Rápido</span>
+              <span><strong>R$ 49</strong></span>
+            </div>
+          </div>
+
+          <div class="item">
+            <h3>Completo</h3>
+            <p>Externo + aspiração + painel + vidros internos.</p>
+            <div class="price">
+              <span class="tag tag-silver">Recomendado</span>
+              <span><strong>R$ 79</strong></span>
+            </div>
+          </div>
+
+          <div class="item">
+            <h3>Premium</h3>
+            <p>Completo + detalhamento extra + proteção rápida.</p>
+            <div class="price">
+              <span class="tag">Top</span>
+              <span><strong>R$ 119</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">Dica: no delivery, é normal cobrar um pouco mais pela conveniência. Ajuste por tamanho (Hatch/Sedan/SUV).</p>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section id="galeria">
+      <div class="container">
+        <div class="section-title">
+          <h2>Galeria</h2>
+          <p>Coloque fotos de antes/depois</p>
+        </div>
+
+        <div class="gallery">
+          <div class="ph"></div>
+          <div class="ph"></div>
+          <div class="ph"></div>
+          <div class="ph"></div>
+        </div>
+
+        <p class="note">Quando você tiver fotos, basta subir no GitHub (ex.: <strong>g1.jpg</strong>, <strong>g2.jpg</strong>…) e eu te digo exatamente como substituir esses placeholders.</p>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona">
+      <div class="container">
+        <div class="section-title">
+          <h2>Como funciona</h2>
+          <p>Simples e direto</p>
+        </div>
+
+        <div class="grid2">
+          <div class="item">
+            <h3>1) Você chama no WhatsApp</h3>
+            <p>Envie serviço + endereço + melhor horário.</p>
+          </div>
+          <div class="item">
+            <h3>2) Chegamos no horário</h3>
+            <p>Levamos os produtos e fazemos o serviço no local.</p>
+          </div>
+          <div class="item">
+            <h3>3) Pagamento fácil</h3>
+            <p>PIX (e cartão, se disponível).</p>
+          </div>
+          <div class="item">
+            <h3>4) Pós-atendimento</h3>
+            <p>Você recebe o resultado e pode agendar a próxima.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-title">
+          <h2>Perguntas frequentes</h2>
+          <p>Respostas rápidas</p>
+        </div>
+
+        <div class="grid2">
+          <details>
+            <summary>Precisa ter água e tomada?</summary>
+            <p>De preferência sim. Se não tiver, dá pra combinar alternativas dependendo do serviço e da região.</p>
+          </details>
+
+          <details>
+            <summary>Quanto tempo demora?</summary>
+            <p>Lavagem completa: geralmente 60 a 120 minutos (depende do tamanho do carro e nível de sujeira).</p>
+          </details>
+
+          <details>
+            <summary>Atendem quais regiões?</summary>
+            <p>Edite aqui: “Osório, Tramandaí, Imbé e região”.</p>
+          </details>
+
+          <details>
+            <summary>O que muda no Premium?</summary>
+            <p>Mais detalhamento, acabamento superior e tempo extra em pontos críticos (sob avaliação).</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contato</h2>
+          <p>Agende em menos de 1 minuto</p>
+        </div>
+
+        <div class="grid2">
+          <div class="item">
+            <h3>💬 WhatsApp</h3>
+            <p>Toque no botão e mande sua localização + serviço + horário.</p>
+            <div style="margin-top:12px">
+              <a class="btn btn-primary" id="btnWhatsContact" href="#">Abrir WhatsApp</a>
+            </div>
+            <p class="mini" style="margin-top:10px">Número: (51) 99287-7285</p>
+          </div>
+
+          <div class="item">
+            <h3>Mensagem pronta</h3>
+            <p class="mini">Preencha e clique em “Enviar no WhatsApp”.</p>
+
+            <div class="form" style="margin-top:10px">
+              <input class="input" id="nome" placeholder="Seu nome" />
+              <input class="input" id="bairro" placeholder="Cidade/Bairro" />
+              <select class="input" id="servico">
+                <option value="Lavagem completa (interno + externo)">Lavagem completa (interno + externo)</option>
+                <option value="Lavagem externa">Lavagem externa</option>
+                <option value="Higienização interna">Higienização interna</option>
+                <option value="Polimento / Revitalização">Polimento / Revitalização</option>
+              </select>
+              <input class="input" id="horario" placeholder="Melhor horário (ex.: hoje 15h)" />
+              <button class="btn btn-primary" id="btnEnviar">📩 Enviar no WhatsApp</button>
+              <div class="mini" id="ok" style="display:none;">✅ Abrindo WhatsApp…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div>
+            <div style="font-weight:900">Clynn Cars</div>
+            <div class="mini">Estética Automotiva Delivery • © <span id="year"></span></div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="#servicos">Serviços</a>
+            <a class="btn" href="#precos">Preços</a>
+            <a class="btn" href="#contato">Contato</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- WhatsApp flutuante -->
+  <a class="btn btn-primary whats-float" id="btnWhatsFloat" href="#" aria-label="Agendar no WhatsApp">
+    💬 WhatsApp
+  </a>
+
+  <script>
+    // ===== CONFIG =====
+    const WHATSAPP_NUMBER = "555199287285"; // 55 + DDD + número
+    const BUSINESS_NAME = "Clynn Cars";
+    const DEFAULT_REGION = "Sua cidade/bairro";
+
+    function waLink(message){
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    }
+
+    function baseMessage(servico="Lavagem completa (interno + externo)", extra={}){
+      const nome = extra.nome || "Cliente";
+      const bairro = extra.bairro || DEFAULT_REGION;
+      const horario = extra.horario || "—";
+
+      return (
+        `Olá! Meu nome é ${nome}. Vim pelo site da ${BUSINESS_NAME}.\n\n` +
+        `Quero agendar:\n` +
+        `• Serviço: ${servico}\n` +
+        `• Local: ${bairro}\n` +
+        `• Melhor horário: ${horario}\n` +
+        `• Carro (modelo/placa): \n\n` +
+        `Pode me passar os horários disponíveis?`
+      );
+    }
+
+    function openWA(msg){
+      window.open(waLink(msg), "_blank");
+    }
+
+    // botões rápidos
+    const quickButtons = ["btnWhatsTop","btnWhatsHero","btnWhatsContact","btnWhatsFloat"];
+    quickButtons.forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener("click",(e)=>{
+        e.preventDefault();
+        openWA(baseMessage());
+      });
+    });
+
+    // formulário
+    document.getElementById("btnEnviar").addEventListener("click", (e)=>{
+      e.preventDefault();
+      const nome = document.getElementById("nome").value.trim();
+      const bairro = document.getElementById("bairro").value.trim();
+      const servico = document.getElementById("servico").value;
+      const horario = document.getElementById("horario").value.trim();
+
+      const msg = baseMessage(servico, {nome, bairro, horario});
+      document.getElementById("ok").style.display = "block";
+      openWA(msg);
+      setTimeout(()=> document.getElementById("ok").style.display="none", 2500);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
