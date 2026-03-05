@@ -127,6 +127,97 @@
       box-shadow: 0 18px 40px rgba(74,168,255,.16), 0 14px 34px rgba(207,214,226,.10);
     }
     .btn-primary:hover{ filter:saturate(1.03); }
+    /* ===== BEFORE/AFTER (proporcional e premium) ===== */
+.ba-wrap{
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+
+.ba{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;      /* <- deixa proporcional ao layout */
+  max-height: 360px;        /* <- limita pra não ficar gigante */
+  background: rgba(255,255,255,.04);
+}
+
+@media (max-width: 980px){
+  .ba{ max-height: 300px; }
+}
+
+.ba img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* <- corta sem deformar */
+  object-position: center;  /* <- centraliza o corte */
+  user-select: none;
+  pointer-events: none;
+}
+
+.ba .after{
+  clip-path: inset(0 0 0 50%);
+}
+
+.ba .line{
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: rgba(255,255,255,.8);
+}
+
+.ba .knob{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: linear-gradient(135deg, rgba(74,168,255,.35), rgba(207,214,226,.20));
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,.95);
+  font-weight: 900;
+  box-shadow: 0 14px 30px rgba(0,0,0,.35);
+}
+
+.ba .labels{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.ba .badge{
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.25);
+  color: rgba(255,255,255,.92);
+}
+
+/* slider invisível (arrasta no desktop e no celular) */
+.ba input[type="range"]{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+}
 
     /* HERO */
     .hero{ padding: 42px 0 18px; }
@@ -504,25 +595,37 @@
     </section>
 
     <!-- GALERIA -->
-    <section id="galeria">
-      <div class="container">
-        <div class="section-title">
-          <h2>Galeria</h2>
-          <p>Coloque fotos de antes/depois</p>
-        </div>
-
-<div class="gallery">
-
-<img src="foto1.jpg">
-<img src="foto2.jpg">
-<img src="foto3.jpg">
-<img src="foto4.jpg">
-
-</div>
-
-        <p class="note">Aqui na CLynn Cars, velocidade e qualidade andam juntas</p>
+   <div class="grid2">
+  <!-- Slider 1 -->
+  <div class="ba-wrap">
+    <div class="ba" data-start="50">
+      <img class="before" src="antes-roda.jpg" alt="Antes - Roda">
+      <img class="after"  src="depois-roda.jpg" alt="Depois - Roda">
+      <div class="labels">
+        <span class="badge">ANTES</span>
+        <span class="badge">DEPOIS</span>
       </div>
-    </section>
+      <div class="line"></div>
+      <div class="knob">↔</div>
+      <input type="range" min="0" max="100" value="50" aria-label="Comparador antes e depois">
+    </div>
+  </div>
+
+  <!-- Slider 2 -->
+  <div class="ba-wrap">
+    <div class="ba" data-start="50">
+      <img class="before" src="antes-tapete.jpg" alt="Antes - Tapete">
+      <img class="after"  src="depois-tapete.jpg" alt="Depois - Tapete">
+      <div class="labels">
+        <span class="badge">ANTES</span>
+        <span class="badge">DEPOIS</span>
+      </div>
+      <div class="line"></div>
+      <div class="knob">↔</div>
+      <input type="range" min="0" max="100" value="50" aria-label="Comparador antes e depois">
+    </div>
+  </div>
+</div>
 
     <!-- COMO FUNCIONA -->
     <section id="como-funciona">
@@ -705,8 +808,33 @@
 
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  
+<script>
+  function initBeforeAfter(container){
+    const range = container.querySelector('input[type="range"]');
+    const afterImg = container.querySelector('.after');
+    const line = container.querySelector('.line');
+    const knob = container.querySelector('.knob');
+
+    const start = Number(container.dataset.start || 50);
+    range.value = start;
+
+    function update(){
+      const v = Number(range.value);
+      afterImg.style.clipPath = `inset(0 0 0 ${v}%)`;
+      line.style.left = `${v}%`;
+      knob.style.left = `${v}%`;
+    }
+
+    range.addEventListener('input', update);
+    update();
+  }
+
+  document.querySelectorAll('.ba').forEach(initBeforeAfter);
+</script>
 </body>
 </html>
+
 
 
 
