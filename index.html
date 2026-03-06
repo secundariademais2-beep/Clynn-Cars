@@ -426,12 +426,20 @@
     top: 0;
   }
 
-  .nav-inner{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    padding: 10px 0;
-  }
+ .nav-inner{
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+}
+     .nav .btn.btn-primary{
+  width: auto;
+  align-self: auto;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 12px;
+}
 
   .brand{
     min-width: 0;
@@ -450,13 +458,13 @@
     display: none;
   }
 
-  .nav .btn.btn-primary{
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 14px;
-  }
-
+ .nav .btn.btn-primary{
+  width: auto;
+  align-self: flex-end;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 12px;
+}
   .hero{
     padding: 24px 0 16px;
   }
@@ -573,7 +581,7 @@
         <a href="#contato">Contato</a>
       </nav>
 
-      <a class="btn btn-primary" id="btnWhatsTop" href="#">Agendar no WhatsApp</a>
+      <a class="btn btn-primary" id="btnWhatsTop" href="#">WhatsApp</a>
     </div>
   </header>
 
@@ -911,6 +919,7 @@
 </script>
 </body>
 </html>
+
 
 
 
