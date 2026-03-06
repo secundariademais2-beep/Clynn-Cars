@@ -419,14 +419,133 @@
     }
 
     /* RESPONSIVE */
-    @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      .nav-links{ display:none; }
-      .grid3{ grid-template-columns: 1fr; }
-      .grid2{ grid-template-columns: 1fr; }
-      .gallery{ grid-template-columns: repeat(2, 1fr); }
-      .ph{ height: 130px; }
-    }
+   @media (max-width: 980px){
+  .nav{
+    position: sticky;
+    top: 0;
+  }
+
+  .nav-inner{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .brand{
+    min-width: 0;
+    width: 100%;
+  }
+
+  .brand-title strong{
+    font-size: 14px;
+  }
+
+  .brand-title span{
+    font-size: 11px;
+  }
+
+  .nav-links{
+    display: none;
+  }
+
+  .nav .btn.btn-primary{
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 14px;
+  }
+
+  .hero{
+    padding: 24px 0 16px;
+  }
+
+  .hero-grid{
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card-pad{
+    padding: 16px;
+  }
+
+  .pill{
+    font-size: 12px;
+    line-height: 1.35;
+    padding: 8px 10px;
+  }
+
+  h1{
+    font-size: 28px;
+    line-height: 1.08;
+  }
+
+  .sub{
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .hero-actions{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn{
+    width: 100%;
+  }
+
+  .grid3{
+    grid-template-columns: 1fr;
+  }
+
+  .grid2{
+    grid-template-columns: 1fr;
+  }
+
+  .kpis{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .price{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .ba{
+    aspect-ratio: 4 / 3;
+    max-height: 260px;
+  }
+
+  .whats-float{
+    right: 12px;
+    bottom: 12px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 560px){
+  .container{
+    padding: 0 14px;
+  }
+
+  .kpis{
+    grid-template-columns: 1fr;
+  }
+
+  h1{
+    font-size: 24px;
+  }
+
+  .sub{
+    font-size: 15px;
+  }
+
+  .ba{
+    max-height: 220px;
+  }
+}
   </style>
 </head>
 
@@ -447,7 +566,7 @@
 
       <nav class="nav-links">
         <a href="#servicos">Serviços</a>
-        <a href="#precos">Preços</a>
+        <a href="#servicos">Serviços</a>
         <a href="#galeria">Galeria</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#contato">Contato</a>
@@ -471,7 +590,7 @@
 
           <div class="hero-actions">
             <a class="btn btn-primary" id="btnWhatsHero" href="#">💬 Agendar agora</a>
-            <a class="btn" href="#precos">Ver preços</a>
+            <a class="btn" href="#servicos">Ver serviços</a>
             <a class="btn" href="#como-funciona">Como funciona</a>
           </div>
 
@@ -695,7 +814,7 @@
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap">
             <a class="btn" href="#servicos">Serviços</a>
-            <a class="btn" href="#precos">Preços</a>
+            <a class="btn" href="#servicos">Serviços</a>
             <a class="btn" href="#contato">Contato</a>
           </div>
         </div>
@@ -791,6 +910,7 @@
 </script>
 </body>
 </html>
+
 
 
 
