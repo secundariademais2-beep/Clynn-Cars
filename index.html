@@ -447,27 +447,6 @@
 
   <script>
     
-    // Sliders Antes/Depois
-    document.querySelectorAll('.ba-wrap').forEach(wrap => {
-      const slider = wrap.querySelector('.ba-slider');
-      const afterImg = wrap.querySelector('.img-after');
-      const baLine = wrap.querySelector('.ba-line');
-      
-      slider.addEventListener('input', (e) => {
-        let val = e.target.value;
-        afterImg.style.clipPath = inset(0 0 0 ${val}%);
-        baLine.style.left = ${val}%;
-      });
-    });
-
-    // Menu Mobile Simplificado
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
-    menuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-
-    // Envio de Formulário
 const WPP_NUMBER = "5551993270914";
 const waLink = (msg) => `https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
@@ -532,14 +511,6 @@ const year = document.getElementById("year");
 if (year) {
   year.textContent = new Date().getFullYear();
 }
-    });
-
-    // Botões padrão de contato
-    const msgPadrao = "Olá, Clynn Cars! Gostaria de mais informações sobre a estética automotiva.";
-    document.getElementById('btnWhatsContact').addEventListener('click', e => { e.preventDefault(); window.open(waLink(msgPadrao), '_blank'); });
-    document.getElementById('btnWppFloat').addEventListener('click', e => { e.preventDefault(); window.open(waLink(msgPadrao), '_blank'); });
-
-    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
