@@ -304,20 +304,42 @@
         <h2>Transformação Real</h2>
       </div>
       <div class="grid-2">
-        <div class="ba-wrap">
-          <img src="foto4.jpg" alt="Antes" onerror="this.src='https://images.unsplash.com/photo-1552831341-2a14357bcde2?w=800';">
-          <img src="foto5.jpg" alt="Depois" class="img-after" onerror="this.src='https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=800';">
-          <div class="ba-labels"><span>Antes</span><span style="color:var(--neon-cyan); border-color:var(--neon-cyan);">Depois</span></div>
-          <div class="ba-line"><div class="ba-btn">◄►</div></div>
-          <input type="range" min="0" max="100" value="50" class="ba-slider">
-        </div>
-        <div class="ba-wrap">
-          <img src="foto3.jpg" alt="Antes" onerror="this.src='https://images.unsplash.com/photo-1506015391300-415214844018?w=800';">
-          <img src="foto2.jpg" alt="Depois" class="img-after" onerror="this.src='https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800';">
-          <div class="ba-labels"><span>Antes</span><span style="color:var(--neon-cyan); border-color:var(--neon-cyan);">Depois</span></div>
-          <div class="ba-line"><div class="ba-btn">◄►</div></div>
-          <input type="range" min="0" max="100" value="50" class="ba-slider">
-        </div>
+<div class="ba-wrap">
+  <img src="foto4.jpg" alt="Antes" class="img-before" onerror="this.src='https://images.unsplash.com/photo-1552831341-2a14357bcde2?w=800';">
+
+  <div class="img-after-layer" style="width: 50%;">
+    <img src="foto5.jpg" alt="Depois" class="img-after" onerror="this.src='https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=800';">
+  </div>
+
+  <div class="ba-labels">
+    <span>Antes</span>
+    <span style="color:var(--neon-cyan); border-color:var(--neon-cyan);">Depois</span>
+  </div>
+
+  <div class="ba-line" style="left: 50%;">
+    <div class="ba-btn">◄►</div>
+  </div>
+
+  <input type="range" min="0" max="100" value="50" class="ba-slider">
+</div>
+<div class="ba-wrap">
+  <img src="foto3.jpg" alt="Antes" class="img-before" onerror="this.src='https://images.unsplash.com/photo-1552831341-2a14357bcde2?w=800';">
+
+  <div class="img-after-layer" style="width: 50%;">
+    <img src="foto2.jpg" alt="Depois" class="img-after" onerror="this.src='https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=800';">
+  </div>
+
+  <div class="ba-labels">
+    <span>Antes</span>
+    <span style="color:var(--neon-cyan); border-color:var(--neon-cyan);">Depois</span>
+  </div>
+
+  <div class="ba-line" style="left: 50%;">
+    <div class="ba-btn">◄►</div>
+  </div>
+
+  <input type="range" min="0" max="100" value="50" class="ba-slider">
+</div>
       </div>
     </div>
   </section>
