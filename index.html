@@ -2,935 +2,476 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Clynn Cars | Estética Automotiva Delivery</title>
-  <meta name="description" content="Clynn Cars — estética automotiva delivery. Lavagem completa (interno e externo), higienização e polimento. Agende pelo WhatsApp." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#070c14;
-      --bg2:#0b1526;
-      --card: rgba(255,255,255,.04);
-      --border: rgba(255,255,255,.10);
-      --text:#eaf1ff;
-      --muted:#9fb0c9;
-
-      /* “cromado” + “azul royal” */
-      --silver1:#f3f6fb;
-      --silver2:#cfd6e2;
-      --silver3:#8e9bb0;
-      --blue1:#4aa8ff;
-      --blue2:#2d6bff;
-
-      --radius: 18px;
-      --shadow: 0 16px 40px rgba(0,0,0,.45);
-      --shadow2: 0 10px 26px rgba(0,0,0,.35);
+    :root {
+      --bg-dark: #05070a;
+      --bg-alt: #0a0e14;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border-glass: rgba(255, 255, 255, 0.1);
+      --text-main: #f0f4f8;
+      --text-muted: #9fb0c9;
+      
+      /* Neon Azul/Ciano */
+      --neon-cyan: #00f0ff;
+      --neon-blue: #0066ff;
+      --glow: 0 0 20px rgba(0, 240, 255, 0.3);
+      
+      --radius: 16px;
       --max: 1120px;
     }
 
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--text);
-      overflow-x: hidden;
-      background:
-        radial-gradient(1000px 600px at 15% 0%, rgba(74,168,255,.22), transparent 60%),
-        radial-gradient(900px 550px at 85% 10%, rgba(207,214,226,.14), transparent 60%),
-        radial-gradient(900px 650px at 60% 120%, rgba(45,107,255,.18), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      line-height: 1.45;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+    body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
+
+    /* ANIMAÇÃO DE ENTRADA SEGURA (CSS PURO) */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    a{ color:inherit; text-decoration:none; }
-    .container{ max-width: var(--max); margin: 0 auto; padding: 0 18px; }
+    .animate-in { animation: fadeIn 0.8s ease-out forwards; }
+
+    a { text-decoration: none; color: inherit; }
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
 
     /* NAV */
-    .nav{
-      position: sticky; top:0; z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(7,12,20,.62);
-      border-bottom: 1px solid var(--border);
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(5, 7, 10, 0.9); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-glass);
     }
-    .nav-inner{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding: 12px 0;
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 75px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+    .brand-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+      display: grid; place-items: center; color: #000; font-size: 1.2rem; box-shadow: var(--glow);
     }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 220px;
-    }
-    .brand-badge{
-      width:44px; height:44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(74,168,255,.28), rgba(207,214,226,.18));
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 14px 28px rgba(74,168,255,.12);
-      display:grid; place-items:center;
-      overflow:hidden;
-    }
-    .brand-badge img{
-      width:100%; height:100%; object-fit: cover;
-      display:block;
-    }
-    .brand-title{
-      display:flex; flex-direction:column;
-      line-height:1.1;
-    }
-    .brand-title strong{
-      font-size: 15px; letter-spacing:.2px;
-    }
-    .brand-title span{
-      font-size: 12px; color: var(--muted);
-      margin-top: 4px;
-    }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links a { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover { color: var(--neon-cyan); }
 
-    .nav-links{
-      display:flex; align-items:center; gap:10px;
-      flex-wrap: wrap;
-      justify-content: center;
+    /* BOTÕES */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 24px; border-radius: 12px; font-weight: 800; font-size: 0.9rem;
+      text-transform: uppercase; cursor: pointer; transition: 0.3s; border: none; white-space: nowrap;
     }
-    .nav-links a{
-      color: var(--muted);
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      transition: .2s ease;
-      font-weight: 650;
-      font-size: 13px;
-    }
-    .nav-links a:hover{
-      color: var(--text);
-      border-color: rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-    }
+    .btn-primary { background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan)); color: #000; box-shadow: var(--glow); }
+    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.2); }
+    .btn-outline { border: 1px solid var(--border-glass); background: transparent; color: var(--text-main); }
+    .btn-outline:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(0,240,255,0.05); }
 
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
-      font-weight: 750;
-      cursor: pointer;
-      transition:.2s ease;
-      box-shadow: none;
-      white-space: nowrap;
+    /* HERO SECTION */
+    .hero { padding: 60px 0; background: radial-gradient(circle at top right, rgba(0, 102, 255, 0.15), transparent 50%); }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center; }
+    
+    .hero-text .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 50px;
+      background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0,240,255,0.3);
+      color: var(--neon-cyan); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px;
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
-    .btn-primary{
-      border: none;
-      background:
-        linear-gradient(135deg, var(--blue1), var(--silver2));
-      color: #071018;
-      box-shadow: 0 18px 40px rgba(74,168,255,.16), 0 14px 34px rgba(207,214,226,.10);
-    }
-    .btn-primary:hover{ filter:saturate(1.03); }
-    /* ===== BEFORE/AFTER (proporcional e premium) ===== */
-.ba-wrap{
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.03);
-  box-shadow: 0 10px 26px rgba(0,0,0,.35);
-  overflow: hidden;
-}
+    .hero-text h1 { font-size: clamp(2.2rem, 4vw, 3.5rem); line-height: 1.1; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; }
+    .hero-text h1 span { color: var(--neon-cyan); }
+    .hero-text p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; max-width: 90%; }
+    .hero-actions { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
+    .hero-note { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
 
-.ba{
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;      /* <- deixa proporcional ao layout */
-  max-height: 360px;        /* <- limita pra não ficar gigante */
-  background: rgba(255,255,255,.04);
-}
+    /* PAINEL DE INFORMAÇÕES (DIREITA) */
+    .hero-panel {
+      background: var(--bg-card); border: 1px solid var(--border-glass);
+      border-radius: var(--radius); padding: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-glass); padding-bottom: 15px; margin-bottom: 15px; }
+    .panel-header h2 { font-size: 1.2rem; }
+    .tag-neon { background: var(--neon-cyan); color: #000; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; }
+    
+    .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+    .kpi-item { background: rgba(0,0,0,0.3); border: 1px solid var(--border-glass); padding: 15px; border-radius: 10px; }
+    .kpi-item .icon { font-size: 1.5rem; margin-bottom: 5px; }
+    .kpi-item strong { display: block; font-size: 1rem; color: #fff; }
+    .kpi-item span { font-size: 0.8rem; color: var(--text-muted); }
 
-@media (max-width: 980px){
-  .ba{ max-height: 300px; }
-}
+    .promo-box {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), transparent);
+      border: 1px solid var(--neon-cyan); padding: 15px; border-radius: 10px;
+    }
+    .promo-box strong { color: var(--neon-cyan); font-size: 0.9rem; display: block; margin-bottom: 5px; }
+    .promo-box p { font-size: 0.85rem; margin: 0; }
 
-.ba img{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;        /* <- corta sem deformar */
-  object-position: center;  /* <- centraliza o corte */
-  user-select: none;
-  pointer-events: none;
-}
+    /* SEÇÕES GENÉRICAS */
+    section { padding: 80px 0; }
+    .bg-alt { background-color: var(--bg-alt); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); }
+    .sec-title { margin-bottom: 40px; display: flex; flex-direction: column; gap: 5px; }
+    .sec-title p { color: var(--neon-cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; }
+    .sec-title h2 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; }
 
-.ba .after{
-  clip-path: inset(0 0 0 50%);
-}
+    /* SERVIÇOS */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius); padding: 30px; transition: 0.3s; display: flex; flex-direction: column; }
+    .card:hover { border-color: var(--neon-cyan); box-shadow: var(--glow); transform: translateY(-5px); }
+    .card h3 { font-size: 1.4rem; margin-bottom: 15px; color: #fff; }
+    .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; flex-grow: 1; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--border-glass); }
+    .price-row strong { font-size: 1.3rem; color: var(--neon-cyan); }
+    .card-badge { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; }
 
-.ba .line{
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%;
-  width: 2px;
-  background: rgba(255,255,255,.8);
-}
+    /* GALERIA ANTES E DEPOIS */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .ba-wrap { position: relative; width: 100%; aspect-ratio: 4/3; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-glass); box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: #000; }
+    .ba-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .img-after { clip-path: inset(0 0 0 50%); }
+    .ba-slider { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; }
+    .ba-line { position: absolute; top: 0; left: 50%; width: 3px; height: 100%; background: var(--neon-cyan); box-shadow: var(--glow); pointer-events: none; transform: translateX(-50%); }
+    .ba-btn { position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; background: var(--bg-dark); border: 2px solid var(--neon-cyan); border-radius: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; color: var(--neon-cyan); font-size: 12px; font-weight: 900; }
+    .ba-labels { position: absolute; top: 15px; left: 15px; right: 15px; display: flex; justify-content: space-between; z-index: 5; }
+    .ba-labels span { background: rgba(0,0,0,0.8); padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 900; text-transform: uppercase; border: 1px solid var(--border-glass); }
 
-.ba .knob{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.25);
-  background: linear-gradient(135deg, rgba(74,168,255,.35), rgba(207,214,226,.20));
-  display: grid;
-  place-items: center;
-  color: rgba(255,255,255,.95);
-  font-weight: 900;
-  box-shadow: 0 14px 30px rgba(0,0,0,.35);
-}
-
-.ba .labels{
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  pointer-events: none;
-}
-
-.ba .badge{
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 800;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(0,0,0,.25);
-  color: rgba(255,255,255,.92);
-}
-
-/* slider invisível (arrasta no desktop e no celular) */
-.ba input[type="range"]{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: ew-resize;
-}
-
-    /* HERO */
-    .hero{ padding: 42px 0 18px; }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
-      align-items: stretch;
-    }
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .card-pad{ padding: 18px; }
-
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 13px;
-    }
-    h1{
-      margin: 14px 0 10px;
-      font-size: clamp(28px, 4vw, 46px);
-      line-height: 1.05;
-      letter-spacing: -0.6px;
-    }
-    .sub{
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 58ch;
-    }
-    .hero-actions{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top: 16px;
-    }
-
-    .hero-right .topline{
-      display:flex; justify-content:space-between; align-items:flex-end; gap:10px;
-      margin-bottom: 10px;
-    }
-    .hero-right h2{
-      margin:0;
-      font-size: 18px;
-      letter-spacing: -0.2px;
-    }
-    .hero-right p{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .kpis{
-      display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-      margin-top: 12px;
-    }
-    .kpi{
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow2);
-    }
-    .kpi .n{ font-weight: 850; font-size: 16px; }
-    .kpi .t{ margin-top: 6px; color: var(--muted); font-size: 12px; }
-
-    .promo{
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(135deg, rgba(74,168,255,.10), rgba(207,214,226,.06));
-    }
-    .promo strong{ display:block; margin-bottom: 6px; }
-    .note{ color: var(--muted); font-size: 13px; margin-top: 10px; }
-
-    section{ padding: 24px 0; }
-    .section-title{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:12px; margin-bottom: 12px;
-    }
-    .section-title h2{ margin:0; font-size: 22px; letter-spacing:-.2px; }
-    .section-title p{ margin:0; color: var(--muted); }
-
-    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .grid2{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-
-    .item{
-      padding: 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow2);
-    }
-    .item h3{ margin: 0 0 6px; font-size: 16px; }
-    .item p{ margin: 0; color: var(--muted); font-size: 14px; }
-
-    .price{
-      display:flex; align-items:center; justify-content:space-between;
-      margin-top: 12px; padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      color: var(--muted);
-      font-weight: 750;
-    }
-    .tag{
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      font-size: 12px;
-      color: var(--text);
-      font-weight: 750;
-    }
-    .tag-silver{
-      background: linear-gradient(135deg, rgba(243,246,251,.16), rgba(207,214,226,.10));
-      border-color: rgba(255,255,255,.14);
-    }
-
-    /* GALLERY */
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    .ph{
-      border-radius: 16px;
-      height: 150px;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(135deg, rgba(74,168,255,.10), rgba(207,214,226,.06));
-      position: relative;
-      overflow:hidden;
-    }
-    .ph::after{
-      content:"Antes / Depois";
-      position:absolute; bottom:10px; left:12px;
-      font-weight: 800;
-      font-size: 12px;
-      color: rgba(255,255,255,.75);
-      letter-spacing:.2px;
-    }
+    /* COMO FUNCIONA */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .step { text-align: center; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius); }
+    .step-num { width: 50px; height: 50px; margin: 0 auto 15px; background: rgba(0,240,255,0.1); border: 2px solid var(--neon-cyan); color: var(--neon-cyan); border-radius: 50%; display: grid; place-items: center; font-size: 1.5rem; font-weight: 900; box-shadow: var(--glow); }
+    .step h3 { font-size: 1.1rem; margin-bottom: 10px; }
+    .step p { font-size: 0.85rem; color: var(--text-muted); }
 
     /* FAQ */
-    details{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding: 14px 16px;
-      box-shadow: var(--shadow2);
-    }
-    summary{
-      cursor:pointer;
-      font-weight: 800;
-      list-style:none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    details p{ margin: 10px 0 0; color: var(--muted); }
+    details { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+    details:hover { border-color: var(--neon-cyan); }
+    summary { font-weight: 800; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; color: var(--neon-cyan); font-size: 1.5rem; transition: 0.3s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { margin-top: 15px; color: var(--text-muted); padding-top: 15px; border-top: 1px solid var(--border-glass); }
 
-    /* CONTACT */
-    .input{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      outline:none;
-      font-size: 14px;
-    }
-    .input:focus{ border-color: rgba(74,168,255,.45); }
-    .form{ display:grid; gap: 10px; }
-    .mini{ font-size: 12px; color: var(--muted); }
+    /* CONTATO */
+    .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius); padding: 40px; }
+    .form-group { margin-bottom: 20px; }
+    .input { width: 100%; padding: 16px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); border-radius: 10px; color: #fff; font-family: inherit; font-size: 1rem; transition: 0.3s; }
+    .input:focus { outline: none; border-color: var(--neon-cyan); box-shadow: var(--glow); }
+    select.input { appearance: none; }
 
-    .footer{
-      margin-top: 16px;
-      padding: 24px 0 44px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
+    /* WHATSAPP FLOAT */
+    .whats-float {
+      position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
+      background: #25D366; color: white; border-radius: 50%; display: grid; place-items: center;
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); z-index: 999; font-size: 32px;
+      animation: pulse 2s infinite; border: 2px solid #fff;
     }
-    .footer .row{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      flex-wrap: wrap;
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); }
+      70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
     }
 
-    /* FLOATING WHATS */
-    .whats-float{
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 60;
-      box-shadow: var(--shadow);
+    /* FOOTER */
+    footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border-glass); margin-top: 40px; color: var(--text-muted); }
+
+    /* MENU MOBILE */
+    .menu-btn { display: none; background: none; border: none; color: #fff; font-size: 30px; cursor: pointer; }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 980px) {
+      .hero-grid, .grid-3, .grid-2, .contact-container { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .hero { padding: 40px 0; }
+      .nav-links { display: none; } /* Ocultado para simplificar, foca no botão CTA no mobile */
+      .menu-btn { display: block; }
+      .nav-links.active {
+        display: flex; flex-direction: column; position: absolute; top: 75px; left: 0; width: 100%;
+        background: var(--bg-dark); padding: 20px; border-bottom: 1px solid var(--border-glass);
+      }
     }
-
-    /* RESPONSIVE */
-   @media (max-width: 980px){
-  .nav{
-    position: sticky;
-    top: 0;
-  }
-
- .nav-inner{
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 0;
-}
-     .nav .btn.btn-primary{
-  width: auto;
-  align-self: auto;
-  padding: 10px 14px;
-  font-size: 14px;
-  border-radius: 12px;
-}
-
-  .brand{
-    min-width: 0;
-    width: 100%;
-  }
-
-  .brand-title strong{
-    font-size: 14px;
-  }
-
-  .brand-title span{
-    font-size: 11px;
-  }
-
-  .nav-links{
-    display: none;
-  }
-
- .nav .btn.btn-primary{
-  width: auto;
-  align-self: flex-end;
-  padding: 10px 14px;
-  font-size: 14px;
-  border-radius: 12px;
-}
-  .hero{
-    padding: 24px 0 16px;
-  }
-
-  .hero-grid{
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .card-pad{
-    padding: 16px;
-  }
-
-  .pill{
-    font-size: 12px;
-    line-height: 1.35;
-    padding: 8px 10px;
-  }
-
-  h1{
-    font-size: 28px;
-    line-height: 1.08;
-  }
-
-  .sub{
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .hero-actions{
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .hero-actions .btn{
-    width: 100%;
-  }
-
-  .grid3{
-    grid-template-columns: 1fr;
-  }
-
-  .grid2{
-    grid-template-columns: 1fr;
-  }
-
-  .kpis{
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .price{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .ba{
-    aspect-ratio: 4 / 3;
-    max-height: 260px;
-  }
-
-  .whats-float{
-    right: 12px;
-    bottom: 12px;
-    padding: 10px 12px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 560px){
-  .container{
-    padding: 0 14px;
-  }
-
-  .kpis{
-    grid-template-columns: 1fr;
-  }
-
-  h1{
-    font-size: 24px;
-  }
-
-  .sub{
-    font-size: 15px;
-  }
-
-  .ba{
-    max-height: 220px;
-  }
-}
+    @media (max-width: 600px) {
+      .steps { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .hero-text h1 { font-size: 2rem; }
+      .contact-container { padding: 20px; }
+    }
   </style>
 </head>
+<body class="animate-in">
 
-<body>
-
-  <header class="nav">
+  <header>
     <div class="container nav-inner">
       <div class="brand">
-        <div class="brand-badge" title="Clynn Cars">
-          <!-- Suba sua logo como 'logo.png' no repositório -->
-          <img src="logo.png" alt="Logo Clynn Cars" onerror="this.style.display='none'; this.parentElement.textContent='CC'; this.parentElement.style.color='#eaf1ff'; this.parentElement.style.fontWeight='900';" />
-        </div>
-        <div class="brand-title">
-          <strong>Clynn Cars</strong>
-          <span>Estética Automotiva Delivery</span>
-        </div>
+        <div class="brand-icon">CC</div>
+        <span>Clynn Cars</span>
       </div>
-
-      <nav class="nav-links">
-        <a href="#servicos">Serviços</a>
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <nav class="nav-links" id="navLinks">
         <a href="#servicos">Serviços</a>
         <a href="#galeria">Galeria</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#contato">Contato</a>
+        <a href="#processo">Processo</a>
+        <a href="#contato" class="btn btn-primary" style="padding: 10px 20px; font-size:0.8rem; color:#000;">Agendar</a>
       </nav>
-
-      <a class="btn btn-primary" id="btnWhatsTop" href="#">WhatsApp</a>
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="card card-pad">
-          <span class="pill">🚗 Atendimento em domicílio • Interno + Externo • Agendamento rápido</span>
-          <h1>Estética automotiva premium<br/>na sua casa.</h1>
-          <p class="sub">
-            Lavagem completa, higienização interna e cuidados estéticos com padrão Clynn Cars.
-            Praticidade + resultado — sem você sair de casa.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" id="btnWhatsHero" href="#">💬 Agendar agora</a>
-            <a class="btn" href="#servicos">Ver serviços</a>
-            <a class="btn" href="#como-funciona">Como funciona</a>
-          </div>
-
-          <p class="note">✅ Levamos os produtos. Você só precisa liberar água e tomada (quando necessário).</p>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="pill">🚗 Delivery Osório e Região</div>
+        <h1>Estética Automotiva <br><span>Premium</span> em Casa.</h1>
+        <p>Lavagem detalhada, higienização e brilho extremo. A praticidade que você precisa com o resultado de estúdio que seu carro merece.</p>
+        <div class="hero-actions">
+          <a href="#contato" class="btn btn-primary">💬 Agendar via WhatsApp</a>
+          <a href="#servicos" class="btn btn-outline">Ver Catálogo</a>
         </div>
-
-        <aside class="card card-pad hero-right">
-          <div class="topline">
-            <div>
-              <h2>Resumo rápido</h2>
-              <p>O que você recebe</p>
-            </div>
-            <span class="tag tag-silver">Premium</span>
-          </div>
-
-          <div class="kpis">
-            <div class="kpi">
-              <div class="n">⏱️ 60–120 min</div>
-              <div class="t">Tempo médio por lavagem completa</div>
-            </div>
-            <div class="kpi">
-              <div class="n">📍 Delivery</div>
-              <div class="t">Atendemos casa/empresa</div>
-            </div>
-            <div class="kpi">
-              <div class="n">✨ Acabamento</div>
-              <div class="t">Detalhe no painel e vidros</div>
-            </div>
-            <div class="kpi">
-              <div class="n">💳 Pagamento</div>
-              <div class="t">PIX e cartão</div>
-            </div>
-          </div>
-
-          <div class="promo">
-            <strong>📣 Promo de lançamento</strong>
-            <div class="mini">Lavagem completa com valor especial na primeira visita.</div>
-          </div>
-        </aside>
+        <div class="hero-note">✅ Levamos os produtos. Libere apenas água e tomada.</div>
       </div>
-    </section>
 
-    <!-- SERVIÇOS -->
-    <section id="servicos">
-      <div class="container">
-        <div class="section-title">
-          <h2>Serviços</h2>
-          <p>O essencial + o premium</p>
+      <div class="hero-panel">
+        <div class="panel-header">
+          <h2>Resumo Rápido</h2>
+          <span class="tag-neon">Info</span>
         </div>
-
-        <div class="grid3">
-          <div class="item">
-            <h3>Lavagem Essencial</h3>
-            <p>Externa + rodas + aspiração + vidros externos + proteção com cera líquida</p>
-            <div class="price">
-              <span class="tag">Mais pedido</span>
-              <span>A partir de <strong>R$ 85</strong></span>
-            </div>
+        <div class="kpi-grid">
+          <div class="kpi-item">
+            <div class="icon">⏱️</div>
+            <strong>60–120 min</strong>
+            <span>Tempo por lavagem</span>
           </div>
-
-          <div class="item">
-            <h3>Detalhada</h3>
-            <p>O Essencial + higienização interna + painel + vidros internos + cantos e frestas + proteção de plásticos + proteção reforçada da pintura</p>
-            <div class="price">
-              <span class="tag">Detalhado</span>
-              <span>A partir de <strong>R$ 149</strong></span>
-            </div>
+          <div class="kpi-item">
+            <div class="icon">📍</div>
+            <strong>Delivery</strong>
+            <span>Na sua casa/empresa</span>
           </div>
+          <div class="kpi-item">
+            <div class="icon">✨</div>
+            <strong>Acabamento</strong>
+            <span>Plásticos e vidros</span>
+          </div>
+          <div class="kpi-item">
+            <div class="icon">💳</div>
+            <strong>Pix / Cartão</strong>
+            <span>Pagamento facilitado</span>
+          </div>
+        </div>
+        <div class="promo-box">
+          <strong>📣 Promo de Lançamento</strong>
+          <p>Condição especial na sua primeira lavagem completa. Aproveite!</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="item">
-            <h3>Detailing Premium</h3>
-            <p>Tudo da Detalhada + higienização profunda + bancos e trilhos + porta-malas + descontaminação da pintura + proteção premium + detalhamento externo + limpeza superficial do motor + proteção de plásticos</p>
-            <div class="price">
-              <span class="tag">Premium</span>
-              <span>A partir de <strong>R$ 360</strong></span>
-            </div>
+  <section id="servicos" class="bg-alt">
+    <div class="container">
+      <div class="sec-title" style="text-align: center; align-items: center;">
+        <p>Catálogo Completo</p>
+        <h2>Nossos Serviços</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>💧 Lavagem Essencial</h3>
+          <p>Externa + rodas + aspiração + vidros externos + proteção com cera líquida de alta durabilidade.</p>
+          <div class="price-row">
+            <span class="card-badge">Mais Pedido</span>
+            <strong>R$ 85</strong>
+          </div>
+        </div>
+        <div class="card" style="border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0,240,255,0.1);">
+          <h3>✨ Detalhada</h3>
+          <p>O Essencial + higienização interna + painel + vidros internos + cantos/frestas + proteção reforçada na pintura.</p>
+          <div class="price-row">
+            <span class="card-badge" style="background: var(--neon-cyan); color: #000;">Recomendado</span>
+            <strong>R$ 149</strong>
+          </div>
+        </div>
+        <div class="card">
+          <h3>💎 Detailing Premium</h3>
+          <p>Tudo da Detalhada + higienização profunda + bancos e trilhos + porta-malas + descontaminação de pintura + limpeza de motor.</p>
+          <div class="price-row">
+            <span class="card-badge">Premium VIP</span>
+            <strong>R$ 360</strong>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-
-
-    <!-- GALERIA -->
- <div class="grid2">
-
-<div class="ba-wrap">
-<div class="ba" data-start="50">
-<img class="before" src="foto4.jpg">
-<img class="after" src="foto5.jpg">
-
-<div class="line"></div>
-<div class="knob"></div>
-
-<input type="range" min="0" max="100" value="50">
-</div>
-</div>
-
-
-<div class="ba-wrap">
-<div class="ba" data-start="50">
-<img class="before" src="foto3.jpg">
-<img class="after" src="foto2.jpg">
-
-<div class="line"></div>
-<div class="knob"></div>
-
-<input type="range" min="0" max="100" value="50">
-</div>
-</div>
-
-</div>
-    <!-- COMO FUNCIONA -->
-    <section id="como-funciona">
-      <div class="container">
-        <div class="section-title">
-          <h2>Como funciona</h2>
-          <p>Simples e direto</p>
+  <section id="galeria">
+    <div class="container">
+      <div class="sec-title" style="text-align: center; align-items: center;">
+        <p>Arraste para ver</p>
+        <h2>Transformação Real</h2>
+      </div>
+      <div class="grid-2">
+        <div class="ba-wrap">
+          <img src="foto4.jpg" alt="Antes" onerror="this.src='https://images.unsplash.com/photo-1552831341-2a14357bcde2?w=800';">
+          <img src="foto5.jpg" alt="Depois" class="img-after" onerror="this.src='https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=800';">
+          <div class="ba-labels"><span>Antes</span><span style="color:var(--neon-cyan); border-color:var(--neon-cyan);">Depois</span></div>
+          <div class="ba-line"><div class="ba-btn">◄►</div></div>
+          <input type="range" min="0" max="100" value="50" class="ba-slider">
         </div>
-
-        <div class="grid2">
-          <div class="item">
-            <h3>1) Você chama no WhatsApp</h3>
-            <p>Envie serviço + endereço + melhor horário.</p>
-          </div>
-          <div class="item">
-            <h3>2) Chegamos no horário</h3>
-            <p>Levamos os produtos e fazemos o serviço no local.</p>
-          </div>
-          <div class="item">
-            <h3>3) Pagamento fácil</h3>
-            <p>PIX e cartao.</p>
-          </div>
-          <div class="item">
-            <h3>4) Pós-atendimento</h3>
-            <p>Você recebe o resultado e pode agendar a próxima.</p>
-          </div>
+        <div class="ba-wrap">
+          <img src="foto3.jpg" alt="Antes" onerror="this.src='https://images.unsplash.com/photo-1506015391300-415214844018?w=800';">
+          <img src="foto2.jpg" alt="Depois" class="img-after" onerror="this.src='https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800';">
+          <div class="ba-labels"><span>Antes</span><span style="color:var(--neon-cyan); border-color:var(--neon-cyan);">Depois</span></div>
+          <div class="ba-line"><div class="ba-btn">◄►</div></div>
+          <input type="range" min="0" max="100" value="50" class="ba-slider">
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="container">
-        <div class="section-title">
-          <h2>Perguntas frequentes</h2>
-          <p>Respostas rápidas</p>
+  <section id="processo" class="bg-alt">
+    <div class="container">
+      <div class="sec-title" style="text-align: center; align-items: center;">
+        <p>Simples e Direto</p>
+        <h2>Como Funciona</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Chame no Whats</h3>
+          <p>Envie o serviço, endereço e o melhor horário.</p>
         </div>
-
-        <div class="grid2">
-          <details>
-            <summary>Precisa ter água e tomada?</summary>
-            <p>De preferência sim. Se não tiver, dá pra combinar alternativas dependendo do serviço e da região.</p>
-          </details>
-
-          <details>
-            <summary>Quanto tempo demora?</summary>
-            <p>Lavagem essencial: geralmente 60 a 120 minutos (depende do tamanho do carro e nível de sujeira).</p>
-          </details>
-
-          <details>
-            <summary>Atendem quais regiões?</summary>
-            <p>Atendemos por toda Osório e regiao.</p>
-          </details>
-
-          <details>
-            <summary>O que muda no Premium?</summary>
-            <p>Mais detalhamento, acabamento superior e tempo extra em pontos críticos (sob avaliação).</p>
-          </details>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Nós Chegamos</h3>
+          <p>Levamos os produtos até sua casa ou trabalho.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Pagamento</h3>
+          <p>Após a avaliação, pague fácil via PIX ou Cartão.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Carro Novo</h3>
+          <p>Aproveite o resultado premium e agende o retorno.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CONTATO -->
-    <section id="contato">
-      <div class="container">
-        <div class="section-title">
-          <h2>Contato</h2>
-          <p>Agende em menos de 1 minuto</p>
-        </div>
-
-        <div class="grid2">
-          <div class="item">
-            <h3>💬 WhatsApp</h3>
-            <p>Toque no botão e mande sua localização + serviço + horário.</p>
-            <div style="margin-top:12px">
-              <a class="btn btn-primary" id="btnWhatsContact" href="#">Abrir WhatsApp</a>
-            </div>
-            <p class="mini" style="margin-top:10px">Número: (51) 9327-0914</p>
-          </div>
-
-          <div class="item">
-            <h3>Mensagem pronta</h3>
-            <p class="mini">Preencha e clique em “Enviar no WhatsApp”.</p>
-
-            <div class="form" style="margin-top:10px">
-              <input class="input" id="nome" placeholder="Seu nome" />
-              <input class="input" id="bairro" placeholder="Cidade/Bairro" />
-              <select class="input" id="servico">
-                <option value="Lavagem completa (interno + externo)">Lavagem Essencial</option>
-                <option value="Lavagem externa">Lavagem Detalhada</option>
-                <option value="Higienização interna">Detailing Premium</option>
-                <option value="Polimento / Revitalização">Outros</option>
-              </select>
-              <input class="input" id="horario" placeholder="Melhor horário (ex.: hoje 15h)" />
-              <button class="btn btn-primary" id="btnEnviar">📩 Enviar no WhatsApp</button>
-              <div class="mini" id="ok" style="display:none;">✅ Abrindo WhatsApp…</div>
-            </div>
-          </div>
-        </div>
+  <section>
+    <div class="container" style="max-width: 800px;">
+      <div class="sec-title" style="text-align: center; align-items: center;">
+        <p>Tire suas dúvidas</p>
+        <h2>Perguntas Frequentes</h2>
       </div>
-    </section>
+      <details>
+        <summary>Precisa ter água e tomada no local?</summary>
+        <p>De preferência sim. Se não tiver, avise no momento do agendamento para estudarmos alternativas dependendo do serviço e da região.</p>
+      </details>
+      <details>
+        <summary>Quanto tempo demora o serviço?</summary>
+        <p>A lavagem essencial leva geralmente de 60 a 120 minutos, variando conforme o tamanho do carro e o nível de sujeira acumulada.</p>
+      </details>
+      <details>
+        <summary>Atendem quais regiões?</summary>
+        <p>Atendemos por toda a cidade de Osório e região metropolitana próxima.</p>
+      </details>
+      <details>
+        <summary>O que muda no serviço Premium?</summary>
+        <p>No Premium incluímos técnicas de Detailing, como descontaminação de pintura, limpeza detalhada de frestas e emblemas, e condicionamento avançado de plásticos.</p>
+      </details>
+    </div>
+  </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div>
-            <div style="font-weight:900">Clynn Cars</div>
-            <div class="mini">Estética Automotiva Delivery • © <span id="year"></span></div>
-          </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap">
-            <a class="btn" href="#servicos">Serviços</a>
-            <a class="btn" href="#servicos">Serviços</a>
-            <a class="btn" href="#contato">Contato</a>
-          </div>
-        </div>
+  <section id="contato" class="bg-alt">
+    <div class="container">
+      <div class="sec-title" style="text-align: center; align-items: center;">
+        <p>Fast Booking</p>
+        <h2>Agende seu Horário</h2>
       </div>
-    </footer>
-  </main>
+      
+      <div class="contact-container">
+        <div>
+          <h3 style="font-size: 1.8rem; margin-bottom: 15px;">Fale Conosco</h3>
+          <p style="color: var(--text-muted); margin-bottom: 30px;">Use o formulário ao lado para gerar uma mensagem automática ou chame direto no botão abaixo.</p>
+          <a href="#" id="btnWhatsContact" class="btn btn-outline" style="width: 100%; margin-bottom: 15px;">Abrir WhatsApp Direto</a>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">📱 (51) 99287-1285</p>
+        </div>
+        
+        <form id="formAgendamento">
+          <div class="form-group">
+            <input type="text" id="nome" class="input" placeholder="Seu Nome Completo" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="bairro" class="input" placeholder="Seu Bairro em Osório" required>
+          </div>
+          <div class="form-group">
+            <select id="servico" class="input" required>
+              <option value="Lavagem Essencial">Lavagem Essencial</option>
+              <option value="Lavagem Detalhada">Lavagem Detalhada</option>
+              <option value="Detailing Premium">Detailing Premium</option>
+              <option value="Outro / Avaliação">Outro / Avaliação</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" id="horario" class="input" placeholder="Preferência de Horário (Ex: Hoje às 14h)">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">📩 Enviar Pedido</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-  <!-- WhatsApp flutuante -->
-  <a class="btn btn-primary whats-float" id="btnWhatsFloat" href="#" aria-label="Agendar no WhatsApp">
-    💬 WhatsApp
+  <footer>
+    <div class="container">
+      <strong style="color: #fff; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px;">Clynn Cars</strong>
+      <p style="margin-top: 10px;">Estética Automotiva Premium Delivery</p>
+      <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">&copy; <span id="year"></span> Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <a href="#" class="whats-float" id="btnWppFloat" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
   </a>
 
   <script>
-    // ===== CONFIG =====
-    const WHATSAPP_NUMBER = "555193270914"; // 55 + DDD + número
-    const BUSINESS_NAME = "Clynn Cars";
-    const DEFAULT_REGION = "Sua cidade/bairro";
-
-    function waLink(message){
-      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    }
-
-    function baseMessage(servico="Lavagem completa (interno + externo)", extra={}){
-      const nome = extra.nome || "Cliente";
-      const bairro = extra.bairro || DEFAULT_REGION;
-      const horario = extra.horario || "—";
-
-      return (
-        `Olá! Meu nome é ${nome}. Vim pelo site da ${BUSINESS_NAME}.\n\n` +
-        `Quero agendar:\n` +
-        `• Serviço: ${servico}\n` +
-        `• Local: ${bairro}\n` +
-        `• Melhor horário: ${horario}\n` +
-        `• Carro (modelo/placa): \n\n` +
-        `Pode me passar os horários disponíveis?`
-      );
-    }
-
-    function openWA(msg){
-      window.open(waLink(msg), "_blank");
-    }
-
-    // botões rápidos
-    const quickButtons = ["btnWhatsTop","btnWhatsHero","btnWhatsContact","btnWhatsFloat"];
-    quickButtons.forEach(id=>{
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.addEventListener("click",(e)=>{
-        e.preventDefault();
-        openWA(baseMessage());
+    // Configurações WhatsApp
+    const WPP_NUMBER = "5551992871285";
+    const waLink = (msg) => https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(msg)};
+    
+    // Sliders Antes/Depois
+    document.querySelectorAll('.ba-wrap').forEach(wrap => {
+      const slider = wrap.querySelector('.ba-slider');
+      const afterImg = wrap.querySelector('.img-after');
+      const baLine = wrap.querySelector('.ba-line');
+      
+      slider.addEventListener('input', (e) => {
+        let val = e.target.value;
+        afterImg.style.clipPath = inset(0 0 0 ${val}%);
+        baLine.style.left = ${val}%;
       });
     });
 
-    // formulário
-    document.getElementById("btnEnviar").addEventListener("click", (e)=>{
-      e.preventDefault();
-      const nome = document.getElementById("nome").value.trim();
-      const bairro = document.getElementById("bairro").value.trim();
-      const servico = document.getElementById("servico").value;
-      const horario = document.getElementById("horario").value.trim();
-
-      const msg = baseMessage(servico, {nome, bairro, horario});
-      document.getElementById("ok").style.display = "block";
-      openWA(msg);
-      setTimeout(()=> document.getElementById("ok").style.display="none", 2500);
+    // Menu Mobile Simplificado
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
     });
+
+    // Envio de Formulário
+    document.getElementById('formAgendamento').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value;
+      const bairro = document.getElementById('bairro').value;
+      const servico = document.getElementById('servico').value;
+      const horario = document.getElementById('horario').value || 'A combinar';
+      
+      const msg = *Agendamento Clynn Cars* 🚗\n\n*Nome:* ${nome}\n*Bairro:* ${bairro}\n*Serviço:* ${servico}\n*Horário:* ${horario}\n\nOlá, gostaria de confirmar disponibilidade!;
+      window.open(waLink(msg), '_blank');
+    });
+
+    // Botões padrão de contato
+    const msgPadrao = "Olá, Clynn Cars! Gostaria de mais informações sobre a estética automotiva.";
+    document.getElementById('btnWhatsContact').addEventListener('click', e => { e.preventDefault(); window.open(waLink(msgPadrao), '_blank'); });
+    document.getElementById('btnWppFloat').addEventListener('click', e => { e.preventDefault(); window.open(waLink(msgPadrao), '_blank'); });
 
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
-  
-<script>
-  function initBeforeAfter(container){
-    const range = container.querySelector('input[type="range"]');
-    const afterImg = container.querySelector('.after');
-    const line = container.querySelector('.line');
-    const knob = container.querySelector('.knob');
-
-    const start = Number(container.dataset.start || 50);
-    range.value = start;
-
-    function update(){
-      const v = Number(range.value);
-      afterImg.style.clipPath = `inset(0 0 0 ${v}%)`;
-      line.style.left = `${v}%`;
-      knob.style.left = `${v}%`;
-    }
-
-    range.addEventListener('input', update);
-    update();
-  }
-
-  document.querySelectorAll('.ba').forEach(initBeforeAfter);
-</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
