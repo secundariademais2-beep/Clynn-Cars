@@ -471,15 +471,70 @@
     });
 
     // Envio de Formulário
-    document.getElementById('formAgendamento').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const nome = document.getElementById('nome').value;
-      const bairro = document.getElementById('bairro').value;
-      const servico = document.getElementById('servico').value;
-      const horario = document.getElementById('horario').value || 'A combinar';
-      
-      const msg = *Agendamento Clynn Cars* 🚗\n\n*Nome:* ${nome}\n*Bairro:* ${bairro}\n*Serviço:* ${servico}\n*Horário:* ${horario}\n\nOlá, gostaria de confirmar disponibilidade!;
-      window.open(waLink(msg), '_blank');
+const WPP_NUMBER = "5551992871285";
+const waLink = (msg) => `https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+// MENU
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+
+if (menuBtn && navLinks) {
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+}
+
+// BOTÕES WHATSAPP (FUNCIONAM SEM BUG)
+const msgPadrao = "Olá, Clynn Cars! Gostaria de mais informações.";
+
+const btnWhatsContact = document.getElementById('btnWhatsContact');
+const btnWppFloat = document.getElementById('btnWppFloat');
+
+if (btnWhatsContact) {
+  btnWhatsContact.href = waLink(msgPadrao);
+  btnWhatsContact.target = "_blank";
+}
+
+if (btnWppFloat) {
+  btnWppFloat.href = waLink(msgPadrao);
+  btnWppFloat.target = "_blank";
+}
+
+// FORMULÁRIO (AGORA FUNCIONA)
+const form = document.getElementById('formAgendamento');
+
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nome = document.getElementById('nome').value.trim();
+    const bairro = document.getElementById('bairro').value.trim();
+    const servico = document.getElementById('servico').value;
+    const horario = document.getElementById('horario').value.trim() || "A combinar";
+
+    if (!nome || !bairro) {
+      alert("Preencha nome e bairro.");
+      return;
+    }
+
+    const msg = `*Agendamento Clynn Cars* 🚗
+
+Nome: ${nome}
+Bairro: ${bairro}
+Serviço: ${servico}
+Horário: ${horario}
+
+Gostaria de confirmar disponibilidade.`;
+
+    window.open(waLink(msg), '_blank');
+  });
+}
+
+// ANO
+const year = document.getElementById("year");
+if (year) {
+  year.textContent = new Date().getFullYear();
+}
     });
 
     // Botões padrão de contato
